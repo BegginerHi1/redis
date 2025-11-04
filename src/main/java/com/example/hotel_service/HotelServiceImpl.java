@@ -24,8 +24,20 @@ public class HotelServiceImpl implements HotelService {
         return repository.findAll();
     }
 
+    @Override
+    @CircuitBreaker(name = "redisCache", fallbackMethod = "fallBackGetHotel")
+    @Cacheable(value = "hotels")
+    public Hotel getHotel(int id) {
+        return repository.findById(id).orElseThrow();
+    }
+
     public List<Hotel> fallbackGetAll(Throwable t) {
         log.warn("Redis unavailable, falling back to DB: {}", t.getMessage());
         return repository.findAll();
+    }
+
+    public Hotel fallBackGetHotel(int id, Throwable t) {
+        log.warn("Redis unavailable, falling back to DB: {}", t.getMessage());
+        return repository.findById(id).orElseThrow();
     }
 }

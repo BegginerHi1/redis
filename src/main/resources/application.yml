@@ -1,4 +1,7 @@
 spring:
+  application:
+    name: hotel-service
+
   redis:
     host: localhost
     port: 6379
@@ -26,3 +29,22 @@ resilience4j.circuitbreaker:
       failureRateThreshold: 50
       waitDurationInOpenState: 30s
       automaticTransitionFromOpenToHalfOpenEnabled: true
+
+logging:
+  level:
+    org.springframework.cache: TRACE
+    io.github.resilience4j: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
