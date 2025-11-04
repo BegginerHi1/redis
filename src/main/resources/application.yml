@@ -26,3 +26,8 @@ resilience4j.circuitbreaker:
       failureRateThreshold: 50
       waitDurationInOpenState: 30s
       automaticTransitionFromOpenToHalfOpenEnabled: true
+
+logging:
+  level:
+    org.springframework.cache: TRACE
+    io.github.resilience4j: DEBUG
