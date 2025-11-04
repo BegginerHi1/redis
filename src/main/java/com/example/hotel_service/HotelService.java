@@ -1,5 +1,7 @@
 package com.example.hotel_service;
 
+import java.util.List;
+
 public interface HotelService {
-    HotelPageDTO getHotels(int page, int size);
+    List<Hotel> getAll();
 }
